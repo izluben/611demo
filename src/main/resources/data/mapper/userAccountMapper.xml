@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.support611.data.mapper.UserAccountMapper" >
+    <resultMap id="BaseResultMap" type="com.support611.data.model.UserAccount" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <collection property="x1Accounts" ofType="com.support611.data.model.X1Account"
+                    column="x1Accounts" select="selectContohFromMaster" />
+    </resultMap>
+
+    <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        SELECT
+        id,
+        name,
+        vipStatus,
+        supportDeskId
+        FROM
+        x1_account
+        WHERE
+        id = #{id}
+  </select>
+
+    <select id="selectX1AccountForUserAccount"
+            parameterType="java.lang.String"
+            resultType="com.support611.data.model.X1Account">
+        SELECT
+        id,
+        accountNumber
+        FROM
+        x1_account
+        WHERE
+        id = #{id}
+  </select>
+</mapper>
